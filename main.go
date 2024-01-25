@@ -12,8 +12,8 @@ import (
 
 func main() {
 
-	//file_with_path := "go run main.go /home/dinesh/paccar/qnx7paccar-b1"
-	//o build main.go -o /home/dinesh/paccar/untarz
+	//file_with_path := "go run main.go /home/dinesh//"
+	//o build main.go -o /home/dinesh/untarz
 
 	argsWithoutProg := os.Args[1:]
 	if len(argsWithoutProg) != 1 {
@@ -23,7 +23,7 @@ func main() {
 	}
 
 	//untarzst(file_with_path)
-	//root := "/home/dinesh/paccar/qnx7paccar-b1"
+	//root := "/home/dinesh/"
 	root := argsWithoutProg[0]
 	fmt.Println("Root folder is " + root)
 	src_recipes := filepath.Join(root, "recipes")
