@@ -27,25 +27,49 @@ func main() {
 	root := argsWithoutProg[0]
 	fmt.Println("Root folder is " + root)
 	src_recipes := filepath.Join(root, "recipes")
-	bin_packages := filepath.Join(root, "packages")
+	// bin_packages := filepath.Join(root, "packages")
 	src_dst := filepath.Join(root, "recipes_srcs")
-	bin_dst := filepath.Join(root, "bin_target_pkgs")
+	// bin_dst := filepath.Join(root, "bin_target_pkgs")
 
 	createDir(src_dst)
-	createDir(bin_dst)
+	// createDir(bin_dst)
 
 	getSources(src_recipes, src_dst)
-	getSources(bin_packages, bin_dst)
+	// getSources(bin_packages, bin_dst)
 
 }
 
 func createDir(dst string) {
 	//err := os.MkdirAll(dst, 777)
-	err := os.Mkdir(dst, 0755)
-	if err != nil {
-		fmt.Println(err.Error())
-		os.Exit(1)
+
+	isexist,_ := exists(dst)
+
+	if isexist == true {
+		err := os.RemoveAll(dst)
+		if err != nil {
+			fmt.Println("Error while removing "+dst)
+			fmt.Println(err.Error())
+			os.Exit(1)
+		}
+
+	}else {
+		err := os.Mkdir(dst, 0755)
+		if err != nil {
+			fmt.Println("Error while Creating "+dst)
+			fmt.Println(err.Error())
+			os.Exit(1)
+		}
 	}
+
+	
+}
+
+// exists returns whether the given file or directory exists
+func exists(path string) (bool, error) {
+	_, err := os.Stat(path)
+	if err == nil { return true, nil }
+	if os.IsNotExist(err) { return false, nil }
+	return false, err
 }
 func getSources(dir, destination_path string) {
 
