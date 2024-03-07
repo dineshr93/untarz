@@ -22,9 +22,12 @@ func main() {
 		os.Exit(1)
 	}
 
+
 	//untarzst(file_with_path)
 	//root := "/home/dinesh/"
 	root := argsWithoutProg[0]
+
+	fmt.Println("Make sure sudo apt-get install zstd")
 	fmt.Println("Root folder is " + root)
 	src_recipes := filepath.Join(root, "recipes")
 	// bin_packages := filepath.Join(root, "packages")
